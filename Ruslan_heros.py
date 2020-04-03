@@ -48,5 +48,5 @@ class Oleg(Intelligence):
         enemy_hero.p_mag -= self.damage * random.uniform(0.1, 0.126)
 
     def guitar(self, teammate):
-        # все союзники хиляться
+        # все союзники хилятся
         teammate.health += (teammate.damage / random.randint(25, 40)) * self.p_mag
