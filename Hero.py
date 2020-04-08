@@ -11,6 +11,12 @@ class Hero:
         self.p_iv = self.ag / 50 * 80
         self.p_mag = self.int / 50 * 70
 
+    def enemy_detection(self, hero):
+        if hero.team == self.team:
+            return False
+        else:
+            return True
+
 
 class Strength(Hero):
     def __init__(self, _st, _ag, _int, team):
