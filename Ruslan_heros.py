@@ -50,3 +50,4 @@ class Oleg(Intelligence):
     def guitar(self, teammate):
         # все союзники хиляться
         teammate.health += (teammate.damage / random.randint(25, 40)) * self.p_mag
+        # comment for test
