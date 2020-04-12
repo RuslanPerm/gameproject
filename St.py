@@ -1,8 +1,11 @@
-from typing import Union
-import random as rnd
+import random
+from time import sleep
+from Hero import Strength
+from Hero import Intelligence
 
 
-class Tank(Strengtha):
+
+class Tank(Strength):
 
     def __init__(self, _st, _ag, _int):
         super(Strengtha).__init__(_st, _ag, _int):
@@ -17,7 +20,7 @@ class Tank(Strengtha):
     # сносит рандомно кол-во хп протиивнку и при этом наност себе слолько же
 
 
-class ShieldDearer(Strengtha):
+class ShieldDearer(Intelligence):
 
      def __init__(self, _st, _ag, _int):
          super(Strengtha).__init__(_st, _ag, _int):
