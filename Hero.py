@@ -17,6 +17,12 @@ class Hero:
         else:
             return True
 
+    def activate_skill(self):
+        if randint.random(100) <= self.p_mag:
+            return True
+        else:
+            return False
+
 
 class Strength(Hero):
     def __init__(self, _st, _ag, _int, team):

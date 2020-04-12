@@ -12,15 +12,23 @@ class Wolfova(Strength):
         # как сделать шанс прокания?
 
     def siren(self, enemy_hero):
-        enemy_hero.health -= 10 * random.uniform(1, 4)
+        enemy_hero.health -= 40 * random.uniform(1, 4)
         sleep(5)
         # все, включая её замирают в радиусе, враги получают урон
 
     def avoid(self, enemy_hero):
         # как проверить ударил ли противник?
-        self.health += enemy_hero.damage
-        # шанс полностью игнорировать урон от атаки, шанс зависит от кол-ва здоровья
-        # (больше здоровья, меньше шанс)
+        chance = 6
+        if chance >= random.randint(0, 10):
+            if self.health <= 500:
+                self.health += enemy_hero.damage
+            elif self.health <= 1000:
+                self.health += enemy_hero.damage // 2
+        else:
+            self.health += enemy_hero.damage // 5
+        # шанс полностью игнорировать урон от атаки, если здоровья не больше 500
+        # шанс игнорировать половину урона от атаки, если здоровья не больше 1000
+        # гарантировано блокируется 1/5 урона от атаки
 
 
 class Trushechkinov(Agility):
@@ -36,7 +44,7 @@ class Trushechkinov(Agility):
     def finish_him(self, enemy_hero):
         if enemy_hero.health < 100:
             enemy_hero.health = 0
-        # шанс выстрелить молнией в случайного противника в радиусе
+        # добивание случайного противника со здоровьем меньше 100 в радиусе
 
 
 class Oleg(Intelligence):
@@ -45,9 +53,9 @@ class Oleg(Intelligence):
         self.skills = [self.sharads, self.punk_hair]
 
     def sharads(self, enemy_hero):
-        enemy_hero.p_mag -= self.damage * random.uniform(0.1, 0.126)
+        enemy_hero.int -= self.damage * random.uniform(0.1, 0.126)
+        # лишает врага части интелекта
 
-    def guitar(self, teammate):
+    def guitar(self, teammates):
         # все союзники хиляться
-        teammate.health += (teammate.damage / random.randint(25, 40)) * self.p_mag
-        # comment for test
+        teammates.health += (teammates.damage / random.randint(25, 40)) * self.p_mag
