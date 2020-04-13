@@ -12,20 +12,22 @@ class Tank(Strength):
         self.skills =[self.protection,self.madman]
 
     def protection(self):
-        pass
+        self.health += enemy_hero.damage
     # 100% защита от удара
 
     def madman(self):
-        pass
-    # сносит рандомно кол-во хп протиивнку и при этом наност себе слолько же
+        bool = random.uniform(0, 100)
+        self.health -= bool
+        self.damage += bool
+        # сносит рандомно кол-во хп протиивнку и при этом наност себе слолько же
 
 
 class ShieldDearer(Intelligence):
 
      def __init__(self, _st, _ag, _int):
          super(Strengtha).__init__(_st, _ag, _int):
-         self.skills = [self.potion,
+         self.skills = [self.potion, pass ]
 
-     def potion(self):
-         pass
+     def potion(self, _int):
+         enemy_hero._int -= random.uniform(0, 10)
      # Понижает шанс выпода скла у противнка
