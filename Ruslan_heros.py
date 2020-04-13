@@ -9,7 +9,6 @@ class Wolfova(Strength):
     def __init__(self, team):
         super().__init__(25, 1, 24)
         self.skills = [self.siren, self.avoid]
-        # как сделать шанс прокания?
 
     def siren(self, enemy_hero):
         enemy_hero.health -= 40 * random.uniform(1, 4)
@@ -50,11 +49,13 @@ class Trushechkinov(Agility):
 class Oleg(Intelligence):
     def __init__(self, team):
         super().__init__(8, 15, 27)
-        self.skills = [self.sharads, self.punk_hair]
+        self.skills = [self.sharads, self.guitar]
 
     def sharads(self, enemy_hero):
-        enemy_hero.int -= self.damage * random.uniform(0.1, 0.126)
-        # лишает врага части интелекта
+        k = random.uniform(0.1, 0.126)
+        enemy_hero.int -= self.damage * k
+        self.int += self.damage * k
+        # крадёт врага части интелекта
 
     def guitar(self, teammates):
         # все союзники хиляться
