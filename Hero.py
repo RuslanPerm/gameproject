@@ -6,7 +6,7 @@ class Hero:
         self.st = _st
         self.ag = _ag
         self.int = _int
-        self.team = team # как распределяются по командам?
+        self.team = team
         self.health = self.st * 25
         self.p_iv = self.ag / 50 * 80
         self.p_mag = self.int / 50 * 70
