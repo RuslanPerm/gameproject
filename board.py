@@ -9,6 +9,23 @@ class Board:
         self.y_size = y_size
         self.status_move = 0
 
+    def fight(self, hero, enemy, first_attack):
+        if first_attack is True:
+            if activate_skill(Hero) is True:
+                # юзает рандомный из своих скиллов
+                pass
+            else:
+                enemy.health -= (hero.damage - enemy.ag * 0.23)
+                # обычный удар "enemy.ag * 0.23" - броня
+        elif first_attack is False:
+            if activate_skill(Hero) is True:
+                # юзает рандомный из своих скиллов
+                pass
+            else:
+                hero.health -= (enemy.damage - hero.ag * 0.23)
+        pass
+    # эскиз для драки выше
+
     def add(self, hero, x, y):
         if x >= self.x_size or x < 0 or y > self.y_size or y < 0:
             print("Bad indexes!")
@@ -27,7 +44,8 @@ class Board:
                     if enemy.team == self.status_move:
                         return False
                     else:
-                        result = self.fight(hero, enemy)
+                        result = self.fight(hero, enemy, first_attack)
+                        # последний перешедщий в клетку атакает (возвращает True, если свой атакает и False если враг)
                         self.field[x_now][y_now] = result
                         return True
                 else:
