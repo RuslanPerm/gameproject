@@ -3,7 +3,6 @@ from Hero import Strength
 from Hero import Intelligence
 
 
-
 class Tank(Strength):
 
     def __init__(self, _st, _ag, _int):
