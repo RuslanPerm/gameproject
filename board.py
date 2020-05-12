@@ -13,6 +13,7 @@ class Board:
         if first_attack is True:
             if activate_skill(Hero) is True:
                 # юзает рандомный из своих скиллов
+                ...
                 pass
             else:
                 enemy.health -= (hero.damage - enemy.ag * 0.23)
@@ -81,4 +82,3 @@ class Board:
             elif count_1 == 0:
                 print('Team 0 win!')
                 break
-
