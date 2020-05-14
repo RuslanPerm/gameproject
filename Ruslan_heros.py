@@ -8,9 +8,9 @@ from Hero import Intelligence
 class Wolfova(Strength):
     def __init__(self, team):
         super().__init__(25, 1, 24)
-        self.skills = [self.siren, self.avoid]
+        self.skills = [self.jump, self.avoid]
 
-    def siren(self):
+    def jump(self):
         pass
 
     def avoid(self, enemy_hero):
@@ -62,4 +62,4 @@ class Oleg(Intelligence):
                 teammates.append(h)
         # все союзники хиляться
         for hero in teammates:
-            hero.health += (teammates.damage / random.randint(25, 40)) * self.p_mag
+            hero.health += (hero.damage / random.randint(25, 40)) * self.p_mag
