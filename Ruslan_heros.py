@@ -10,10 +10,8 @@ class Wolfova(Strength):
         super().__init__(25, 1, 24)
         self.skills = [self.siren, self.avoid]
 
-    def siren(self, enemy_hero):
-        enemy_hero.health -= 40 * random.uniform(1, 4)
-        sleep(5)
-        # все, включая её замирают в радиусе, враги получают урон
+    def siren(self):
+        pass
 
     def avoid(self, enemy_hero):
         # как проверить ударил ли противник?
@@ -57,6 +55,11 @@ class Oleg(Intelligence):
         self.int += self.damage * k
         # крадёт врага части интелекта
 
-    def guitar(self, teammates):
+    def guitar(self, lst_of_heroes):
+        teammates = []
+        for h in lst_of_heroes:
+            if h.team == self.team:
+                teammates.append(h)
         # все союзники хиляться
-        teammates.health += (teammates.damage / random.randint(25, 40)) * self.p_mag
+        for hero in teammates:
+            hero.health += (teammates.damage / random.randint(25, 40)) * self.p_mag
