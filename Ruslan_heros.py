@@ -8,19 +8,24 @@ from Hero import Intelligence
 class Wolfova(Strength):
     def __init__(self, team):
         super().__init__(25, 1, 24)
-        self.skills = [self.siren, self.avoid]
-        # как сделать шанс прокания?
+        self.skills = [self.jump, self.avoid]
 
-    def siren(self, enemy_hero):
-        enemy_hero.health -= 10 * random.uniform(1, 4)
-        sleep(5)
-        # все, включая её замирают в радиусе, враги получают урон
+    def jump(self):
+        pass
 
     def avoid(self, enemy_hero):
         # как проверить ударил ли противник?
-        self.health += enemy_hero.damage
-        # шанс полностью игнорировать урон от атаки, шанс зависит от кол-ва здоровья
-        # (больше здоровья, меньше шанс)
+        chance = 6
+        if chance >= random.randint(0, 10):
+            if self.health <= 500:
+                self.health += enemy_hero.damage
+            elif self.health <= 1000:
+                self.health += enemy_hero.damage // 2
+        else:
+            self.health += enemy_hero.damage // 5
+        # шанс полностью игнорировать урон от атаки, если здоровья не больше 500
+        # шанс игнорировать половину урона от атаки, если здоровья не больше 1000
+        # гарантировано блокируется 1/5 урона от атаки
 
 
 class Trushechkinov(Agility):
@@ -36,17 +41,25 @@ class Trushechkinov(Agility):
     def finish_him(self, enemy_hero):
         if enemy_hero.health < 100:
             enemy_hero.health = 0
-        # шанс выстрелить молнией в случайного противника в радиусе
+        # добивание случайного противника со здоровьем меньше 100 в радиусе
 
 
 class Oleg(Intelligence):
     def __init__(self, team):
         super().__init__(8, 15, 27)
-        self.skills = [self.sharads, self.punk_hair]
+        self.skills = [self.sharads, self.guitar]
 
     def sharads(self, enemy_hero):
-        enemy_hero.p_mag -= self.damage * random.uniform(0.1, 0.126)
+        k = random.uniform(0.1, 0.126)
+        enemy_hero.int -= self.damage * k
+        self.int += self.damage * k
+        # крадёт врага части интелекта
 
-    def guitar(self, teammate):
+    def guitar(self, lst_of_heroes):
+        teammates = []
+        for h in lst_of_heroes:
+            if h.team == self.team:
+                teammates.append(h)
         # все союзники хиляться
-        teammate.health += (teammate.damage / random.randint(25, 40)) * self.p_mag
+        for hero in teammates:
+            hero.health += (hero.damage / random.randint(25, 40)) * self.p_mag

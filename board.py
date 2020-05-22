@@ -9,6 +9,24 @@ class Board:
         self.y_size = y_size
         self.status_move = 0
 
+    def fight(self, hero, enemy, first_attack):
+        if first_attack is True:
+            if activate_skill(Hero) is True:
+                # юзает рандомный из своих скиллов
+                ...
+                pass
+            else:
+                enemy.health -= (hero.damage - enemy.ag * 0.23)
+                # обычный удар "enemy.ag * 0.23" - броня
+        elif first_attack is False:
+            if activate_skill(Hero) is True:
+                # юзает рандомный из своих скиллов
+                pass
+            else:
+                hero.health -= (enemy.damage - hero.ag * 0.23)
+        pass
+    # эскиз для драки выше
+
     def add(self, hero, x, y):
         if x >= self.x_size or x < 0 or y > self.y_size or y < 0:
             print("Bad indexes!")
@@ -27,7 +45,8 @@ class Board:
                     if enemy.team == self.status_move:
                         return False
                     else:
-                        result = self.fight(hero,enemy)
+                        result = self.fight(hero, enemy, first_attack)
+                        # последний перешедщий в клетку атакает (возвращает True, если свой атакает и False если враг)
                         self.field[x_now][y_now] = result
                         return True
                 else:
@@ -41,3 +60,25 @@ class Board:
             else:
                 return False
         return False
+
+    def game(self):
+        while True:
+            print(f"Ходит команда{self.status_move}")
+            x, y = map(int, input().split())
+            x_now, y_now = map(int, input().split())
+            self.move(x, y, x_now, y_now)
+            count_0 = 0
+            count_1 = 0
+            for i in range(self.x_size):
+                for j in range(self.y_size):
+                    if self.field[i][j] != 0:
+                        if self.field[i][j].team == 0:
+                            count_0 += 1
+                        else:
+                            count_1 += 1
+            if count_0 == 0:  # доработать со скилами и способностями
+                print('Team 1 win!')
+                break
+            elif count_1 == 0:
+                print('Team 0 win!')
+                break
