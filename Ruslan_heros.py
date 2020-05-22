@@ -1,5 +1,4 @@
 import random
-from time import sleep
 from Hero import Strength
 from Hero import Agility
 from Hero import Intelligence
