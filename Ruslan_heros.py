@@ -63,3 +63,16 @@ class Oleg(Intelligence):
         # все союзники хиляться
         for hero in teammates:
             hero.health += (hero.damage / random.randint(25, 40)) * self.p_mag
+
+
+class Dogg(Agility):
+    def __init__(self, team):
+        super().__init__(17, 18, 15)
+        self.skills = [self.kick, self.dual_life]
+
+    def kick(self, enemy_hero):
+        enemy_hero.health -= self.damage
+
+    def dual_life(self):
+        if (self.health >= 0) or (self.health <= 20):
+            self.health += self.ag * 10
