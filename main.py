@@ -1,12 +1,12 @@
 import pygame
-import Board
+import New_Board
 import Hero
 import random
 
 
 WINDOW_SIZE = WIDTH, HEIGHT = 800, 800
 BOARD_SIZE, CELL_SIZE = 10, 50
-GAME_BOARD = Board.Board(BOARD_SIZE, CELL_SIZE)
+GAME_BOARD = New_Board.Board(BOARD_SIZE, CELL_SIZE)
 
 pygame.init()
 screen = pygame.display.set_mode(WINDOW_SIZE)
