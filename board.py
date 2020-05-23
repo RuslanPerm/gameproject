@@ -7,6 +7,9 @@ class Board:
         self.field = [[0] * y_size for _ in range(x_size)]
         self.x_size = x_size
         self.y_size = y_size
+        self.hero_list = []
+        self.team_list = []
+        self.team_dict = {}
         self.status_move = 0
 
     def fight(self, hero, enemy, first_attack):
@@ -28,11 +31,27 @@ class Board:
     # эскиз для драки выше
 
     def add(self, hero, x, y):
-        if x >= self.x_size or x < 0 or y > self.y_size or y < 0:
-            print("Bad indexes!")
+        self.hero_list.append(hero)
+        if x > (self.x_size - 1) or x < 0 or y > (self.y_size - 1) or y < 0:
+            print('емае, чё делаешь, выйди и зайди нормально')
             return False
         elif self.field[x][y] != 0:
-            print("Cell not is empty!")
+            print('тут занято')
+            return False
+        else:
+            self.field[x][y] = hero
+            hero.x = x
+            hero.y = y
+            return True
+
+    def team_add(self):
+        for hero in self.hero_list:
+            if hero.team not in self.team_dict:
+                self.team_dict[hero.team] = [hero]
+            else:
+                self.team_dict[hero.team].append(hero)
+            if hero.team not in self.team_list:
+                self.team_list.append(hero.team)
 
     def move(self, x, y, x_now, y_now):
         hero = self.field[x][y]
