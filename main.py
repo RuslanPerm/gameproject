@@ -57,8 +57,8 @@ def change_turn(chturn):
     else:
         return 'red'
 
-while running:
 
+while running:
     red_hero = team_red[index_red]
     blue_hero = team_blue[index_blue]
 
