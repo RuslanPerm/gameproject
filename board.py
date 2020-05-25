@@ -11,7 +11,7 @@ class Board:
 
     def fight(self, hero, enemy, first_attack):
         if first_attack is True:
-            if activate_skill(Hero) is True:
+            if hero.activate_skill() is True:
                 # юзает рандомный из своих скиллов
                 ...
                 pass
@@ -19,7 +19,7 @@ class Board:
                 enemy.health -= (hero.damage - enemy.ag * 0.23)
                 # обычный удар "enemy.ag * 0.23" - броня
         elif first_attack is False:
-            if activate_skill(Hero) is True:
+            if hero.activate_skill() is True:
                 # юзает рандомный из своих скиллов
                 pass
             else:
