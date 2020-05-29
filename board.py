@@ -6,23 +6,23 @@ class Board:
         self.hero_list = []
         self.team_list = []
         self.team_dict = {}
-        self.field = [[], []]
         self.status_move = 0
-
-    def fight(self, hero, enemy_hero):
-        while True:
-            hero.degree_of_dying -= 1 if hero.degree_of_dying > 0 else hero.strike(enemy)
-            if (hero.health < 0) and (enemy.health < 0):
-                if self.check_hero_health() == 'конец':
-                    return None
-                return False
-            hero, enemy = enemy, hero
 
     def add(self, hero, x, y):
         self.hero_list.append(hero)
         self.field[x][y] = hero
-        hero.x, hero.y = x, y
+        hero.x = x
+        hero.y = y
         return True
+
+    def fight(self, hero, enemy_hero):
+        while True:
+            hero.degree_of_dying -= 1 if hero.degree_of_dying > 0 else hero.strike(enemy_hero)
+            if (hero.health < 0) and (enemy_hero.health < 0):
+                if self.check_hero_health() == 'конец':
+                    return None
+                return False
+            hero, enemy_hero = enemy_hero, hero
 
     def team_add(self):
         for hero in self.hero_list:
@@ -53,11 +53,14 @@ class Board:
     def check_hero_health(self):
         for hero in self.hero_list:
             if hero.health < 0:
-                print(f'{hero.name} ({hero.team}) was killed.\n')
+                print(f'{hero.name} ({hero.team}) погибает.\n')
+                print(f'F.\n')
                 self.hero_list.remove(hero)
                 self.team_dict[hero.team].remove(hero)
                 if self.game() is None:
                     return 'конец'
+            else:
+                return f'{hero.name} имеет {hero.health} хп'
 
     def move(self, hero):
         command = input().lower()
@@ -103,8 +106,6 @@ class Board:
                         print('Тут уже союзник стоит.', end="\n")
                     else:
                         return step_status
-            elif command == "здоровье":
-                self.heroes_status()
             elif command == 'остановочка':
                 return False
             elif command == 'камаз камаз я на целый час':
